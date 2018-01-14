@@ -34,19 +34,19 @@ if (!git) {
 }
 
 const hooks = path.resolve(git, 'hooks')
-const precommit = path.resolve(hooks, 'pre-commit')
+const preCommit = path.resolve(hooks, 'pre-commit')
 
 if (!exists(hooks)) fs.mkdirSync(hooks)
 
-if (exists(precommit) && !fs.lstatSync(precommit).isSymbolicLink()) {
+if (exists(preCommit) && !fs.lstatSync(preCommit).isSymbolicLink()) {
     console.log('pre-commit: Detected an existing git pre-commit hook')
-    fs.writeFileSync(precommit + '.old', fs.readFileSync(precommit))
+    fs.writeFileSync(preCommit + '.old', fs.readFileSync(preCommit))
     console.log('pre-commit: Old pre-commit hook backuped to pre-commit.old')
 }
 
 // delete pre-commit
 try {
-    fs.unlinkSync(precommit)
+    fs.unlinkSync(preCommit)
 } catch (e) {}
 
 const preCommitPath = path.resolve(__dirname, 'pre-commit')
@@ -60,7 +60,7 @@ const preCommitTpl = `
 `
 
 try {
-    fs.writeFileSync(precommit, preCommitTpl)
+    fs.writeFileSync(preCommit, preCommitTpl)
 } catch (e) {
     console.error('pre-commit: Failed to create the hook file in your .git/hooks folder because:')
     console.error('pre-commit: ' + e.message)
@@ -69,7 +69,7 @@ try {
 
 // change file permission
 try {
-    fs.chmodSync(precommit, '777')
+    fs.chmodSync(preCommit, '777')
 } catch (e) {
     console.error('pre-commit: chmod 0777 the pre-commit file in your .git/hooks folder because:')
     console.error('pre-commit: ' + e.message)
