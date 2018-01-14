@@ -13,7 +13,7 @@ const exec = cmd => execSync(cmd).toString()
 
 // get command from package.json
 // config "pre-commit" as an Array
-const cmds = pkgJson['pre-commit']
+const cmds = pkgJson['pre-commit'] || []
 
 try {
     cmds.forEach(cmd => {
