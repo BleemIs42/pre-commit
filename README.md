@@ -2,7 +2,7 @@
 
 ## Install
 ```bash
-npm install pre-commit-hook
+npm install githook-pre-commit
 ``` 
 
 ## Use 

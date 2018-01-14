@@ -1,9 +1,10 @@
 {
-  "name": "pre-commit-hook",
-  "version": "1.0.0",
+  "name": "githook-pre-commit",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install": "node index.js",
     "echo": "echo 1111",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
