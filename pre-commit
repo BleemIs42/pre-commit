@@ -2,28 +2,9 @@
 
 // git config --global core.hooksPath $HOME/.git/hooks/
 
+const fs = require('fs')
 const path = require('path')
 const execSync = require('child_process').execSync
-
-const root = path.resolve(__dirname, '..', '..')
-// const root = path.resolve(__dirname)
-const pkgJson = require(path.join(root, 'package.json'))
-
-const exec = cmd => execSync(cmd).toString()
-
-// get command from package.json
-// config "pre-commit" as an Array
-const cmds = pkgJson['pre-commit'] || []
-
-try {
-    cmds.forEach(cmd => {
-        const res = exec(`npm run ${cmd}`)
-        console.log(res)
-    })
-}catch(err){
-    console.log(err)
-}
-
 
 const red = str => `\u001B[1;31m${str}\u001B[0m`
 const blue = str => `\u001B[1;34m${str}\u001B[0m`
@@ -31,6 +12,27 @@ const grey = str => `\u001B[2;37m${str}\u001B[0m`
 const white = str => `\u001B[1;37m${str}\u001B[0m`
 const magenta = str => `\u001B[1;35m${str}\u001B[0m`
 const redFlash = str => `\u001B[1;31;5m${str}\u001B[0m`
+
+const exec = cmd => execSync(cmd).toString()
+
+const root = path.resolve(__dirname, '..', '..')
+// const root = path.resolve(__dirname)
+
+const pkgPath = path.join(root, 'package.json')
+if (fs.existsSync(pkgPath)) {
+    const pkgJson = require(pkgPath)
+    // get command from package.json
+    // config "pre-commit" as an Array
+    const cmds = pkgJson['pre-commit'] || []
+    try {
+        cmds.forEach(cmd => {
+            const res = exec(`npm run ${cmd}`)
+            console.log(res)
+        })
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 const addSpace = length => new Array(length).fill(1).map(item => ` `).join('')
 const space = addSpace(14)
