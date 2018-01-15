@@ -47,6 +47,8 @@ try {
     const files = exec(`git status -s | awk '{print $2}'`).split('\n').filter(file => file.length)
 
     files.forEach(file => {
+        if(!fs.existsSync(file)) return
+
         const lines = exec(`cat ${file}`).split('\n')
 
         lines.forEach((line, lineNo) => {
