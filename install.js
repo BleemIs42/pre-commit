@@ -1,8 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const execSync = require('child_process').execSync
-
-const exec = cmd => execSync(cmd).toString()
 
 const root = path.resolve(__dirname, '..', '..')
 // const root = path.resolve(__dirname)
