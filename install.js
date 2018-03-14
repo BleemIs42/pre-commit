@@ -47,14 +47,13 @@ try {
     fs.unlinkSync(preCommit)
 } catch (e) {}
 
-const preCommitPath = path.resolve(__dirname, 'pre-commit')
-const preCommitTpl = `
-    #!/usr/bin/env bash
+const preCommitPath = path.resolve(__dirname, 'pre-commit').replace(/\\/g, '/')
+const preCommitTpl = `#!/usr/bin/env bash
 
-    ${preCommitPath}
-    RESULT=$?
-    [ $RESULT -ne 0 ] && exit 1
-    exit 0
+${preCommitPath}
+RESULT=$?
+[ $RESULT -ne 0 ] && exit 1
+exit 0
 `
 
 try {
