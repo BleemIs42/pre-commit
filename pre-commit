@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const execSync = require('child_process').execSync
 
+
 const red = str => `\u001B[1;31m${str}\u001B[0m`
 const blue = str => `\u001B[1;34m${str}\u001B[0m`
 const grey = str => `\u001B[2;37m${str}\u001B[0m`
@@ -43,25 +44,42 @@ const errInfo = []
 
 console.log(`${white(`pre-commit`)}: ${blue(`checking...`)}`)
 
+const addLog = file => {
+    const lines = exec(`cat ${file}`).split('\n')
+    lines.forEach((line, lineNo) => {
+        const column = line.indexOf(signStr)
+        if (~column) {
+            errInfo.push({
+                file,
+                line: [`\n${red(`${space}${line}`)}`].concat(exec(`cat ${file} | sed -n '${lineNo + 2},${lineNo + 7}'p`).split('\n').map(line => `${grey(`${space}${line}`)}`)).join('\n'),
+                lineNo: lineNo + 1,
+                column
+            })
+        }
+    })
+}
+const checkPath = file => {
+    if(!fs.existsSync(file)) return
+
+    const stats = fs.lstatSync(file)
+    if(stats.isDirectory()){
+        const list = exec(`ls ${file} | awk '{print $1}'`)
+                        .split('\n').filter(file => file.length)
+                        .map(name => `${file}${name}`)
+
+        list.forEach(path => {
+            checkPath(path)
+        })
+    } else if(stats.isFile()) {
+        addLog(file)
+    }
+}
+
 try {
     const files = exec(`git status -s | awk '{print $2}'`).split('\n').filter(file => file.length)
 
     files.forEach(file => {
-        if(!fs.existsSync(file)) return
-
-        const lines = exec(`cat ${file}`).split('\n')
-
-        lines.forEach((line, lineNo) => {
-            const column = line.indexOf(signStr)
-            if (~column) {
-                errInfo.push({
-                    file,
-                    line: [`\n${red(`${space}${line}`)}`].concat(exec(`cat ${file} | sed -n '${lineNo + 2},${lineNo + 7}'p`).split('\n').map(line => `${grey(`${space}${line}`)}`)).join('\n'),
-                    lineNo: lineNo + 1,
-                    column
-                })
-            }
-        })
+        checkPath(file)
     })
 } catch (err) {
     console.log(`${white(`pre-commit`)}: `, red(err))
