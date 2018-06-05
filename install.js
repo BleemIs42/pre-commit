@@ -9,7 +9,7 @@ const getGitFolderPath = currPath => {
     const git = path.resolve(currPath, '.git')
 
     if (!exists(git) || !fs.lstatSync(git).isDirectory()) {
-        console.log('pre-commit: Not found .git folder in', git)
+        console.log('githook-pre-commit: Not found .git folder in', git)
 
         var newPath = path.resolve(currPath, '..')
 
@@ -27,27 +27,27 @@ const getGitFolderPath = currPath => {
 const git = getGitFolderPath(root)
 
 if (!git) {
-    console.log('pre-commit: Not found any .git folder for installing pre-commit hook')
+    console.log('githook-pre-commit: Not found any .git folder for installing githook-pre-commit hook')
     return
 }
 
 const hooks = path.resolve(git, 'hooks')
-const preCommit = path.resolve(hooks, 'pre-commit')
+const preCommit = path.resolve(hooks, 'githook-pre-commit')
 
 if (!exists(hooks)) fs.mkdirSync(hooks)
 
 if (exists(preCommit) && !fs.lstatSync(preCommit).isSymbolicLink()) {
-    console.log('pre-commit: Detected an existing git pre-commit hook')
+    console.log('githook-pre-commit: Detected an existing git githook-pre-commit hook')
     fs.writeFileSync(preCommit + '.old', fs.readFileSync(preCommit))
-    console.log('pre-commit: Old pre-commit hook backuped to pre-commit.old')
+    console.log('githook-pre-commit: Old githook-pre-commit hook backuped to githook-pre-commit.old')
 }
 
-// delete pre-commit
+// delete githook-pre-commit
 try {
     fs.unlinkSync(preCommit)
 } catch (e) {}
 
-const preCommitPath = path.resolve(__dirname, 'pre-commit').replace(/\\/g, '/')
+const preCommitPath = path.resolve(__dirname, 'githook-pre-commit').replace(/\\/g, '/')
 const preCommitTpl = `#!/usr/bin/env bash
 
 ${preCommitPath}
@@ -59,15 +59,15 @@ exit 0
 try {
     fs.writeFileSync(preCommit, preCommitTpl)
 } catch (e) {
-    console.error('pre-commit: Failed to create the hook file in your .git/hooks folder because:')
-    console.error('pre-commit: ' + e.message)
-    console.error('pre-commit: The hook was not installed.')
+    console.error('githook-pre-commit: Failed to create the hook file in your .git/hooks folder because:')
+    console.error('githook-pre-commit: ' + e.message)
+    console.error('githook-pre-commit: The hook was not installed.')
 }
 
 // change file permission
 try {
     fs.chmodSync(preCommit, '777')
 } catch (e) {
-    console.error('pre-commit: chmod 0777 the pre-commit file in your .git/hooks folder because:')
-    console.error('pre-commit: ' + e.message)
+    console.error('githook-pre-commit: chmod 0777 the githook-pre-commit file in your .git/hooks folder because:')
+    console.error('githook-pre-commit: ' + e.message)
 }

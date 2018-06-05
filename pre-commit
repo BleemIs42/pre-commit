@@ -42,7 +42,7 @@ const signStr = `<<<<<<`
 
 const errInfo = []
 
-console.log(`${white(`pre-commit`)}: ${blue(`checking...`)}`)
+console.log(`${white(`githook-pre-commit`)}: ${blue(`checking...`)}`)
 
 const addLog = file => {
     const lines = exec(`cat ${file}`).split('\n')
@@ -82,12 +82,12 @@ try {
         checkPath(file)
     })
 } catch (err) {
-    console.log(`${white(`pre-commit`)}: `, red(err))
+    console.log(`${white(`githook-pre-commit`)}: `, red(err))
 }
 
 if (errInfo.length) {
 
-    console.log(`${white(`pre-commit`)}: ${red(`check fail`)}`)
+    console.log(`${white(`githook-pre-commit`)}: ${red(`check fail`)}`)
 
     errInfo.forEach(({
         file,
@@ -105,6 +105,6 @@ if (errInfo.length) {
     process.exit(1)
 }
 
-console.log(`${white(`pre-commit`)}: check success \n`)
+console.log(`${white(`githook-pre-commit`)}: check success \n`)
 
 process.exit(0)
