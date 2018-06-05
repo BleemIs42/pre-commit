@@ -1,4 +1,5 @@
 # pre-commit
+> Check git merger conflict by default.
 
 ## Install
 ```bash
@@ -17,3 +18,6 @@ package.json
     "pre-commit": ["echo"]
 }
 ```
+
+## Demo
+![](https://user-images.githubusercontent.com/8463435/40959228-aae28fa8-68ce-11e8-891b-451d37e6e05a.png)
