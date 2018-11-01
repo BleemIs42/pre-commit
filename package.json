@@ -1,6 +1,6 @@
 {
   "name": "githook-pre-commit",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "pre-commit": ["echo"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shafley/pre-commit.git"
+    "url": "git+https://github.com/barryyan/pre-commit.git"
   },
   "keywords": [
     "git",
@@ -24,10 +24,10 @@
     "test",
     "development"
   ],
-  "author": "Shafley <shalefyxia@gmail.com>",
+  "author": "Barryyan <barry.yansh@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shafley/pre-commit/issues"
+    "url": "https://github.com/barryyan/pre-commit/issues"
   },
-  "homepage": "https://github.com/Shafley/pre-commit#readme"
+  "homepage": "https://github.com/barryyan/pre-commit#readme"
 }

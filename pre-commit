@@ -58,6 +58,7 @@ const addLog = file => {
         }
     })
 }
+
 const checkPath = file => {
     if(!fs.existsSync(file)) return
 

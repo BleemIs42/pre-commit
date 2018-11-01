@@ -32,7 +32,7 @@ if (!git) {
 }
 
 const hooks = path.resolve(git, 'hooks')
-const preCommit = path.resolve(hooks, 'githook-pre-commit')
+const preCommit = path.resolve(hooks, 'pre-commit')
 
 if (!exists(hooks)) fs.mkdirSync(hooks)
 

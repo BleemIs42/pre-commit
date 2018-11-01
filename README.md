@@ -1,5 +1,5 @@
 # pre-commit
-> Check git merger conflict by default.
+> Check git merge conflict by default.
 
 ## Install
 ```bash
