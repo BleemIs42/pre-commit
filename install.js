@@ -47,7 +47,7 @@ try {
     fs.unlinkSync(preCommit)
 } catch (e) {}
 
-const preCommitPath = path.resolve(__dirname, 'githook-pre-commit').replace(/\\/g, '/')
+const preCommitPath = path.resolve(__dirname, 'pre-commit').replace(/\\/g, '/')
 const preCommitTpl = `#!/usr/bin/env bash
 
 ${preCommitPath}
