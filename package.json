@@ -1,11 +1,11 @@
 {
   "name": "githook-pre-commit",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "",
   "main": "index.js",
   "scripts": {
     "install": "node index.js",
-    "uninstall": "node uninstall",
+    "uninstall": "node uninstall.js",
     "echo": "echo 1111",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
