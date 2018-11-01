@@ -20,4 +20,4 @@ package.json
 ```
 
 ## Demo
-![](https://user-images.githubusercontent.com/8463435/40959228-aae28fa8-68ce-11e8-891b-451d37e6e05a.png)
+![](https://user-images.githubusercontent.com/8463435/40959829-6a949c46-68d0-11e8-94bf-16718229879f.png)
