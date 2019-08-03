@@ -19,5 +19,8 @@ package.json
 }
 ```
 
+## Go version
+[pre-commit-go (https://github.com/BarryYan/pre-commit-go)](https://github.com/BarryYan/pre-commit-go)
+
 ## Demo
 ![](https://user-images.githubusercontent.com/8463435/40959829-6a949c46-68d0-11e8-94bf-16718229879f.png)
